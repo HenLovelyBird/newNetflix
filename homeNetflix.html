@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- fontawesome link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="homeNetflix.css">
+</head>
+
+<body>
+  <!--nav bar one: title logo, (6) Home, tv, movies, recently added, my List, search bar, kids, bell icon, pulldown menu-->
+  <div class="container-flex">
+    <div class="row mb-4">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-transparent sticky-top">
+        <a class="navbar-brand" href="#"><img class="img-responsive2" src="nflixLogo.png" alt="netflixLogo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active navLinks">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Comedy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Docus</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">RomCom</a>
+            </li>
+          </ul>
+
+
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <ul id="navBackOffice">
+            <li class="nav-item">
+              <a class="nav-link" href="backOfficeNetfilx.html" id="linkBackOffice">Back Office</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+    <!--cards row 6-->
+    <div class="container-flex ">
+      <div class="row" id="movie-cards-Comedy">
+        <!-- .map movie cards here -->
+        <div class=" col-sm-6 col-md-4 col-lg-2 card bg-dark text-white">
+          <img src="" class="card-img" alt="...">
+          <div class="card-img-overlay">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+              content.
+              This content is a little bit longer.</p>
+            <p class="card-text">Last updated 3 mins ago</p>
+          </div>
+        </div>
+
+        <!--cards row 6-->
+    <div class="container-flex ">
+        <div class="row" id="movie-cards-Documentary">
+          <!-- .map movie cards here -->
+          <div class=" col-sm-6 col-md-4 col-lg-2 card bg-dark text-white">
+            <img src="" class="card-img" alt="...">
+            <div class="card-img-overlay">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content.
+                This content is a little bit longer.</p>
+              <p class="card-text">Last updated 3 mins ago</p>
+            </div>
+          </div>
+
+          <!--cards row 6-->
+    <div class="container-flex ">
+        <div class="row" id="movie-cards-RomCom">
+          <!-- .map movie cards here -->
+          <div class=" col-sm-6 col-md-4 col-lg-2 card bg-dark text-white">
+            <img src="" class="card-img" alt="...">
+            <div class="card-img-overlay">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content.
+                This content is a little bit longer.</p>
+              <p class="card-text">Last updated 3 mins ago</p>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+
+    <script>
+      windows.onload = async () => {
+        loadMoviesHome()
+      }
+
+      loadMoviesHome = async () => {
+          let username = "user16"
+          let password = "c9WEUxMS294hN6fF"
+          let token = btoa(username + ":" + password)
+          let resp = await fetch (baseUrl, {
+            method: "GET",
+            body: JSON.stringify(movie),
+            headers: {
+              "authorization": "Basic " + token,
+              "Content-Type": "application/json"
+            }
+          })
+          let jsonResp = await resp.json()
+          console.log(jsonResp)
+        }
+        
+        document.querySelector("#movie-cards-Comedy").innerHTML(map => `
+<div class="col-sm-6 col-md-4 col-lg-2 card bg-dark text-white">
+<img src="${movie.imageUrl}" class=card-img alt="...">
+<div class="card-img-overlay">
+         <h5 class="card-title">${movie.title}</h5>
+         <p class="card-text">${movie.description}</p>
+         <p class="card-text">${movie.category}</p>
+</div>
+`).join("")
+
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src=helper.js></script>
+
+</body>
+
+</html>
